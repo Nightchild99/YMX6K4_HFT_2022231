@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMX6K4_HFT_2022231.Client", "YMX6K4_HFT_2022231.Client\YMX6K4_HFT_2022231.Client.csproj", "{2C5ACE67-34D1-46E4-96D1-AD210295C993}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C5ACE67-34D1-46E4-96D1-AD210295C993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5ACE67-34D1-46E4-96D1-AD210295C993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5ACE67-34D1-46E4-96D1-AD210295C993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5ACE67-34D1-46E4-96D1-AD210295C993}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4A84E33-88AC-469D-AE03-28F4251D0CE5}
+	EndGlobalSection
+EndGlobal
