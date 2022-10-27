@@ -42,6 +42,7 @@ namespace YMX6K4_HFT_2022231.Models
 
         }
 
+        public static Random rnd;
         public Player(string line)
         {
             string[] datas = line.Split('#');
@@ -50,7 +51,7 @@ namespace YMX6K4_HFT_2022231.Models
             CharacterName = datas[2];
             RaceID = int.Parse(datas[3]);
             ClassID = int.Parse(datas[4]);
-            Level = int.Parse(datas[5]);
+            Level = rnd.Next(4,7);
         }
     }
 }

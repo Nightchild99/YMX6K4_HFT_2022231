@@ -8,4 +8,14 @@
     <ProjectReference Include="..\YMX6K4_HFT_2022231.Models\YMX6K4_HFT_2022231.Models.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
 </Project>
