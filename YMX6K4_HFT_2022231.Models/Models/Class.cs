@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YMX6K4_HFT_2022231.Models
+namespace YMX6K4_HFT_2022231.Models.Models
 {
-    public enum Type {tank, melee, ranged, caster, support, healer, various}
+    public enum Type { tank, melee, ranged, caster, support, healer, various }
 
     [Table("Classes")]
     public class Class

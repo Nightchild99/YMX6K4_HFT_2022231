@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YMX6K4_HFT_2022231.Models
+namespace YMX6K4_HFT_2022231.Models.Models
 {
     [Table("Races")]
     public class Race
@@ -44,7 +44,7 @@ namespace YMX6K4_HFT_2022231.Models
             }
             else
             {
-                Allowed = true; 
+                Allowed = true;
             }
         }
     }

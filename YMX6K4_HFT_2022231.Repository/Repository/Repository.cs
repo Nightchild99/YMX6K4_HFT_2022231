@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YMX6K4_HFT_2022231.Repository.Database;
+using YMX6K4_HFT_2022231.Repository.Interface;
 
-namespace YMX6K4_HFT_2022231.Repository
+namespace YMX6K4_HFT_2022231.Repository.Repository
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {

@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YMX6K4_HFT_2022231.Models;
+using YMX6K4_HFT_2022231.Models.Models;
 
-namespace YMX6K4_HFT_2022231.Repository
+namespace YMX6K4_HFT_2022231.Repository.Database
 {
     public class DnDDbContext : DbContext
     {
@@ -16,7 +17,7 @@ namespace YMX6K4_HFT_2022231.Repository
 
         public DnDDbContext()
         {
-            this.Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

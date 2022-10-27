@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YMX6K4_HFT_2022231.Repository
+namespace YMX6K4_HFT_2022231.Repository.Interface
 {
     public interface IRepository<T> where T : class
     {

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YMX6K4_HFT_2022231.Models
+namespace YMX6K4_HFT_2022231.Models.Models
 {
     [Table("Party")]
     public class Player
@@ -53,7 +53,7 @@ namespace YMX6K4_HFT_2022231.Models
             CharacterName = datas[2];
             RaceID = int.Parse(datas[3]);
             ClassID = int.Parse(datas[4]);
-            Level = rnd.Next(4,7);
+            Level = rnd.Next(4, 7);
         }
     }
 }
