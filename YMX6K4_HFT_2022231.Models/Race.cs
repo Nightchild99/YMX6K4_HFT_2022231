@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace YMX6K4_HFT_2022231.Models
 {
+    [Table("Races")]
     public class Race
     {
         [Key]
@@ -22,5 +23,29 @@ namespace YMX6K4_HFT_2022231.Models
 
         [Required]
         public bool Allowed { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Player> Players { get; set; }
+
+        public Race()
+        {
+            Players = new HashSet<Player>();
+        }
+
+        public Race(string line)
+        {
+            string[] datas = line.Split('#');
+            ID = int.Parse(datas[0]);
+            Name = datas[1];
+            Source = datas[2];
+            if (datas[3] == "0")
+            {
+                Allowed = false;
+            }
+            else
+            {
+                Allowed = true; 
+            }
+        }
     }
 }
