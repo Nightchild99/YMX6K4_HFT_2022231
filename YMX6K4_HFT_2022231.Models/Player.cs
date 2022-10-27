@@ -45,6 +45,8 @@ namespace YMX6K4_HFT_2022231.Models
         public static Random rnd;
         public Player(string line)
         {
+            rnd = new Random();
+
             string[] datas = line.Split('#');
             ID = int.Parse(datas[0]);
             Name = datas[1];
