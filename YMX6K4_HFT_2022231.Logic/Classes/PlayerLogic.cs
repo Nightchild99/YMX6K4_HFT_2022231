@@ -42,5 +42,37 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
         {
             this.repo.Update(item);
         }
+
+        public IEnumerable<Player> PlayersUsingCoreRules()
+        {
+            return this.repo.ReadAll().Where(p => p.Race.Source == "phb");
+        }
+
+        public IEnumerable<Player> PlayersPlayingCaster()
+        {
+            return this.repo.ReadAll().Where(p => p.Class.Type == Models.Models.Type.caster);
+        }
+
+        public IEnumerable<Player> PlayersByClassType()
+        {
+            return from x in repo.ReadAll()
+                   group x by x.Class.Type into g
+                   select new Player();
+        }
+
+        public IEnumerable<Class> MostPlayedClass()
+        {
+            return this.repo.ReadAll().GroupBy(p => p.Class)
+                                .OrderByDescending(g => g.Count())
+                                .FirstOrDefault()
+                                .Select(p => p.Class);
+        }
+
+        public IEnumerable<Player> SupportPlayersUsingCoreRules()
+        {
+            return this.repo.ReadAll().Where(p => p.Race.Source == "phb"
+                            && (p.Class.Type == Models.Models.Type.support
+                            || p.Class.Type == Models.Models.Type.healer));
+        }
     }
 }
