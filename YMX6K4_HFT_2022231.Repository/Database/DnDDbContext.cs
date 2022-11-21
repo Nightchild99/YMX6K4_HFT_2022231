@@ -119,7 +119,7 @@ namespace YMX6K4_HFT_2022231.Repository.Database
                 new Player("7#Alex#Alvin#13#3"),
                 new Player("8#Tamara#Lynari#9#13"),
                 new Player("9#Attila#Peet#21#11"),
-                new Player("10#Dóra#Echo#5#11")
+                new Player("10#Dóra#Echo#5#13")
             });
         }
     }
