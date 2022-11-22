@@ -2,6 +2,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using YMX6K4_HFT_2022231.Logic.Classes;
 using YMX6K4_HFT_2022231.Models.Models;
@@ -23,6 +24,7 @@ namespace YMX6K4_HFT_2022231.Test
             var anita = new Player("3#Anita#Shalott#8#5");
             var tamara = new Player("4#Tamara#Lynari#9#13");
             var dora = new Player("5#Dóra#Echo#5#13");
+            var alex = new Player("6#Alex#Deviren#21#16");
 
             var ratfolk = new Race("31#Ratfolk#dndb#1");
             ratfolk.Players = new HashSet<Player>();
@@ -30,10 +32,12 @@ namespace YMX6K4_HFT_2022231.Test
             dragonborn.Players = new HashSet<Player>();
             var elf = new Race("8#Elf#phb#1");
             elf.Players = new HashSet<Player>();
-            var fairy = new Race("9#Fairy#wbtw#1");
+            var fairy = new Race("9#Fairy#wbtw#0");
             fairy.Players = new HashSet<Player>();
             var changeling = new Race("5#Changeling#erlw#0");
             changeling.Players = new HashSet<Player>();
+            var human = new Race("21#Human#phb#1");
+            human.Players = new HashSet<Player>();
 
             var barbarian = new Class("2#Barbarian#tank#1");
             barbarian.Players = new HashSet<Player>();
@@ -43,6 +47,8 @@ namespace YMX6K4_HFT_2022231.Test
             ranger.Players = new HashSet<Player>();
             var rogue = new Class("13#Rogue#melee#1");
             rogue.Players = new HashSet<Player>();
+            var wizard = new Class("16#Wizard#caster#1");
+            wizard.Players = new HashSet<Player>();
 
             bogi.Race = ratfolk;
             bogi.Class = ranger;
@@ -54,6 +60,8 @@ namespace YMX6K4_HFT_2022231.Test
             tamara.Class = rogue;
             dora.Race = changeling;
             dora.Class = rogue;
+            alex.Race = human;
+            alex.Class = wizard;
 
             ratfolk.Players.Add(bogi);
             dragonborn.Players.Add(gyula);
@@ -65,10 +73,12 @@ namespace YMX6K4_HFT_2022231.Test
             ranger.Players.Add(bogi);
             rogue.Players.Add(tamara);
             rogue.Players.Add(dora);
+            human.Players.Add(alex);
+            wizard.Players.Add(alex);
 
             var players = new List<Player>()
             {
-               bogi, gyula, anita, tamara, dora
+               bogi, gyula, anita, tamara, dora, alex
             }.AsQueryable();
 
             mockPlayerRepository = new Mock<IRepository<Player>>();
@@ -127,6 +137,73 @@ namespace YMX6K4_HFT_2022231.Test
         {
             logic.Delete(1);
             mockPlayerRepository.Verify(d => d.Delete(It.IsAny<int>()), Times.Once);
+        }
+
+        [Test]
+        public void PlayersUsingCoreRulesTest()
+        {
+            var gyula = new Player("2#Gyula#Skeltaas#6#2");
+            var anita = new Player("3#Anita#Shalott#8#5");
+
+            var expected = new List<Player>();
+            expected.Add(gyula);
+            expected.Add(anita);
+
+            var result = logic.PlayersUsingCoreRules();
+
+            Assert.AreEqual(result, expected);
+        }
+
+        [Test]
+        public void PlayersPlayingCasterTest()
+        {
+            var alex = new Player("6#Alex#Deviren#21#16");
+
+            var expected = new List<Player>();
+            expected.Add(alex);
+
+            var result = logic.PlayersPlayingCaster();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void MostPlayedClassTest()
+        {
+            var expected = new List<Class>();
+            var rogue = new Class("13#Rogue#melee#1");
+            expected.Add(rogue);
+
+            var result = logic.MostPlayedClass();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void SupportPlayersUsingCoreRulesTest()
+        {
+            var anita = new Player("3#Anita#Shalott#8#5");
+            var expected = new List<Player>();
+            expected.Add(anita);
+
+            var result = logic.SupportPlayersUsingCoreRules();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void PlayersWithNotAllowedCharacterTest()
+        {
+            var tamara = new Player("4#Tamara#Lynari#9#13");
+            var dora = new Player("5#Dóra#Echo#5#13");
+
+            var expected = new List<Player>();
+            expected.Add(tamara);
+            expected.Add(dora);
+
+            var result = logic.PlayersWithNotAllowedCharacters();
+
+            Assert.AreEqual(expected, result);
         }
     }
 }

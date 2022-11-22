@@ -73,5 +73,10 @@ namespace YMX6K4_HFT_2022231.Models.Models
                     && this.ClassID == b.ClassID;
             }
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.ID, this.RaceID, this.ClassID);
+        }
     }
 }

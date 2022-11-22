@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace YMX6K4_HFT_2022231.Models.Models
 {
-    public enum Type { tank, melee, ranged, caster, support, healer, various }
+    public enum Type { tank=1, melee=2, ranged=3, caster=4, support=5, healer=6, various=7 }
 
     [Table("Classes")]
     public class Class
@@ -69,6 +69,23 @@ namespace YMX6K4_HFT_2022231.Models.Models
             else
             {
                 Allowed = true;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            Class b = obj as Class;
+
+            if (b == null)
+            {
+                return false;
+            }
+            else
+            {
+                return b.ID == this.ID
+                    && b.Name == this.Name
+                    && b.Type == this.Type
+                    && b.Allowed == this.Allowed;
             }
         }
     }

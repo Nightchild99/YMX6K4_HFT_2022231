@@ -29,7 +29,7 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
                 throw new ArgumentException();
             }
             
-            this.repo.Create(item);
+             this.repo.Create(item);
         }
 
         public void Delete(int id)
@@ -62,19 +62,16 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
             return this.repo.ReadAll().Where(p => p.Class.Type == Models.Models.Type.caster);
         }
 
-        public IEnumerable<Player> PlayersByClassType()
-        {
-            return from x in repo.ReadAll()
-                   group x by x.Class.Type into g
-                   select new Player();
-        }
-
         public IEnumerable<Class> MostPlayedClass()
         {
-            return this.repo.ReadAll().GroupBy(p => p.Class)
+            var asd =  this.repo.ReadAll().GroupBy(p => p.Class)
                                 .OrderByDescending(g => g.Count())
-                                .FirstOrDefault()
-                                .Select(p => p.Class);
+                                .FirstOrDefault();
+
+            var result = new List<Class>();
+            result.Add(asd.FirstOrDefault().Class);
+
+            return result;
         }
 
         public IEnumerable<Player> SupportPlayersUsingCoreRules()
@@ -82,6 +79,12 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
             return this.repo.ReadAll().Where(p => p.Race.Source == "phb"
                             && (p.Class.Type == Models.Models.Type.support
                             || p.Class.Type == Models.Models.Type.healer));
+        }
+
+        public IEnumerable<Player> PlayersWithNotAllowedCharacters()
+        {
+            return this.repo.ReadAll().Where(p => p.Race.Allowed == false
+                                        || p.Class.Allowed == false);
         }
     }
 }
