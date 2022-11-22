@@ -1,5 +1,6 @@
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using YMX6K4_HFT_2022231.Logic.Classes;
@@ -91,6 +92,41 @@ namespace YMX6K4_HFT_2022231.Test
             var player = new Player("2#Gyula#Skeltaas#6#2");
             logic.Create(player);
             mockPlayerRepository.Verify(m => m.Create(player), Times.Once);
+        }
+
+        [Test]
+        public void PlayerCreateNullTest()
+        {
+            var player = new Player();
+            try
+            {
+                logic.Create(player);
+            }
+            catch 
+            {
+            }
+            Assert.That(() => logic.Create(player), Throws.TypeOf<NullReferenceException>());
+        }
+
+        [Test]
+        public void PlayerIncorrectCreateTest()
+        {
+            var player = new Player("3#An#Shalott#8#5");
+            try
+            {
+                logic.Create(player);
+            }
+            catch
+            {
+            }
+            Assert.That(() => logic.Create(player), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void DeleteTest()
+        {
+            logic.Delete(1);
+            mockPlayerRepository.Verify(d => d.Delete(It.IsAny<int>()), Times.Once);
         }
     }
 }

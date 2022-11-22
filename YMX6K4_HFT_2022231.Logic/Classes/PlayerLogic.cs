@@ -20,6 +20,15 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
 
         public void Create(Player item)
         {
+            if (item.Name == null)
+            {
+                throw new NullReferenceException();
+            }
+            else if (item.Name.Length < 3)
+            {
+                throw new ArgumentException();
+            }
+            
             this.repo.Create(item);
         }
 
