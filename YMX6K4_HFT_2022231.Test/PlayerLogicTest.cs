@@ -84,5 +84,13 @@ namespace YMX6K4_HFT_2022231.Test
 
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void PlayerCreateTest()
+        {
+            var player = new Player("2#Gyula#Skeltaas#6#2");
+            logic.Create(player);
+            mockPlayerRepository.Verify(m => m.Create(player), Times.Once);
+        }
     }
 }
