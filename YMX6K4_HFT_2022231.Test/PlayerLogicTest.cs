@@ -144,10 +144,12 @@ namespace YMX6K4_HFT_2022231.Test
         {
             var gyula = new Player("2#Gyula#Skeltaas#6#2");
             var anita = new Player("3#Anita#Shalott#8#5");
+            var alex = new Player("6#Alex#Deviren#21#16");
 
             var expected = new List<Player>();
             expected.Add(gyula);
             expected.Add(anita);
+            expected.Add(alex);
 
             var result = logic.PlayersUsingCoreRules();
 
