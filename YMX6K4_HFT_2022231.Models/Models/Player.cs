@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace YMX6K4_HFT_2022231.Models.Models
 {
-    [Table("Party")]
     public class Player
     {
         [Key]
@@ -22,16 +22,16 @@ namespace YMX6K4_HFT_2022231.Models.Models
         [StringLength(30)]
         public string CharacterName { get; set; }
 
-        [NotMapped]
         [ForeignKey(nameof(RaceID))]
         public int RaceID { get; set; }
 
-        [NotMapped]
         [ForeignKey(nameof(ClassID))]
         public int ClassID { get; set; }
 
+        [JsonIgnore]
         public virtual Race Race { get; set; }
 
+        [JsonIgnore]
         public virtual Class Class { get; set; }
 
         [Required]

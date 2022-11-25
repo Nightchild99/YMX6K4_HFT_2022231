@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace YMX6K4_HFT_2022231.Models.Models
 {
-    [Table("Races")]
     public class Race
     {
         [Key]
@@ -24,7 +24,7 @@ namespace YMX6K4_HFT_2022231.Models.Models
         [Required]
         public bool Allowed { get; set; }
 
-        [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Player> Players { get; set; }
 
         public Race()

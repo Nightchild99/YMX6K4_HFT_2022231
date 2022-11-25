@@ -9,6 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YMX6K4_HFT_2022231.Logic.Classes;
+using YMX6K4_HFT_2022231.Logic.Interfaces;
+using YMX6K4_HFT_2022231.Models.Models;
+using YMX6K4_HFT_2022231.Repository.Interface;
+using YMX6K4_HFT_2022231.Repository.ModelRepositories;
 
 namespace YMX6K4_HFT_2022231.Endpoint
 {
@@ -21,9 +26,15 @@ namespace YMX6K4_HFT_2022231.Endpoint
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository<Player>, PlayerRepository>();
+            services.AddTransient<IRepository<Race>, RaceRepository>();
+            services.AddTransient<IRepository<Class>, ClassRepository>();
+
+            services.AddTransient<IPlayerLogic, PlayerLogic>();
+            services.AddTransient<IRaceLogic, RaceLogic>();
+            services.AddTransient<IClassLogic, ClassLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -32,7 +43,6 @@ namespace YMX6K4_HFT_2022231.Endpoint
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
