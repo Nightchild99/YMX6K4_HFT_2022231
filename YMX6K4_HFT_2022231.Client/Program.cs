@@ -3,8 +3,6 @@ using System;
 using YMX6K4_HFT_2022231.Models.Models;
 using System.Linq;
 using System.Collections.Generic;
-using MovieDbApp.Client;
-using Microsoft.VisualBasic.FileIO;
 
 namespace YMX6K4_HFT_2022231.Client
 {
@@ -27,7 +25,7 @@ namespace YMX6K4_HFT_2022231.Client
                 int classid = int.Parse(Console.ReadLine());
 
                 Player newPlayer = new Player { Name = name, CharacterName = charname, RaceID = raceid, ClassID = classid };
-                rest.Post(newPlayer, "palyer");
+                rest.Post(newPlayer, "player");
             }
             else if (entity == "Race")
             {
@@ -116,8 +114,8 @@ namespace YMX6K4_HFT_2022231.Client
                 List<Player> players = rest.Get<Player>("player");
                 foreach (var item in players)
                 {
-                    Console.WriteLine(item.Name + " is playing " + item.CharacterName
-                        + ", a level " + item.Level + " " + item.Race.Name + " " + item.Class.Name + ".");
+                    Console.WriteLine(item.ID + "\t" + item.Name + "\t" 
+                        + item.CharacterName + "\t" + item.RaceID + "\t" + item.ClassID);
                 }
             }
             else if (entity == "Race")
@@ -150,6 +148,7 @@ namespace YMX6K4_HFT_2022231.Client
                     }
                 }
             }
+            Console.ReadLine();
         }
         #endregion
 

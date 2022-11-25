@@ -34,7 +34,6 @@ namespace YMX6K4_HFT_2022231.Models.Models
         [JsonIgnore]
         public virtual Class Class { get; set; }
 
-        [Required]
         public int Level { get; set; }
 
         public Player()
