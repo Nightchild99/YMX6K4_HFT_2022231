@@ -110,15 +110,42 @@ namespace YMX6K4_HFT_2022231.Client
         {
             if (entity == "Player")
             {
-
+                List<Player> players = rest.Get<Player>("player");
+                foreach (var item in players)
+                {
+                    Console.WriteLine(item.Name + " is playing " + item.CharacterName 
+                        + ", a level " + item.Level + " " + item.Race.Name + " " + item.Class.Name + ".");
+                }
             }
             else if (entity == "Race")
             {
-
+                List<Race> races = rest.Get<Race>("race");
+                foreach (var item in races)
+                {
+                    if (item.Allowed == true)
+                    {
+                        Console.WriteLine(item.ID + "\t" + item.Name + "\t" + item.Source + "\t" + "allowed");
+                    }
+                    else
+                    {
+                        Console.WriteLine(item.ID + "\t" + item.Name + "\t" + item.Source + "\t" + "not allowed");
+                    }
+                }
             }
             else if (entity == "Class")
             {
-
+                List<Class> classes = rest.Get<Class>("class");
+                foreach (var item in classes)
+                {
+                    if (item.Allowed == true)
+                    {
+                        Console.WriteLine(item.ID + "\t" + item.Name + "\t" + item.Type + "\t" + "allowed");
+                    }
+                    else
+                    {
+                        Console.WriteLine(item.ID + "\t" + item.Name + "\t" + item.Type + "\t" + "not allowed");
+                    }
+                }
             }
         }
 
