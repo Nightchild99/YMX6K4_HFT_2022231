@@ -12,6 +12,7 @@ namespace YMX6K4_HFT_2022231.Client
     {
         static RestService rest;
 
+        #region Create
         static void Create(string entity)
         {
             if (entity == "Player")
@@ -48,7 +49,7 @@ namespace YMX6K4_HFT_2022231.Client
                 }
 
                 rest.Post(newRace, "race");
-                
+
             }
             else if (entity == "Class")
             {
@@ -105,7 +106,9 @@ namespace YMX6K4_HFT_2022231.Client
                 }
             }
         }
+        #endregion
 
+        #region List
         static void List(string entity)
         {
             if (entity == "Player")
@@ -113,7 +116,7 @@ namespace YMX6K4_HFT_2022231.Client
                 List<Player> players = rest.Get<Player>("player");
                 foreach (var item in players)
                 {
-                    Console.WriteLine(item.Name + " is playing " + item.CharacterName 
+                    Console.WriteLine(item.Name + " is playing " + item.CharacterName
                         + ", a level " + item.Level + " " + item.Race.Name + " " + item.Class.Name + ".");
                 }
             }
@@ -148,7 +151,9 @@ namespace YMX6K4_HFT_2022231.Client
                 }
             }
         }
+        #endregion
 
+        #region Update
         static void Update(string entity)
         {
             if (entity == "Player")
@@ -267,26 +272,35 @@ namespace YMX6K4_HFT_2022231.Client
                 }
             }
         }
+        #endregion
 
+        #region Delete
         static void Delete(string entity)
         {
             if (entity == "Player")
             {
-
+                Console.WriteLine("Enter player's ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "player");
             }
             else if (entity == "Race")
             {
-
+                Console.WriteLine("Enter race's ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "race");
             }
             else if (entity == "Class")
             {
-
+                Console.WriteLine("Enter class ID to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "class");
             }
         }
+        #endregion
 
         static void Main(string[] args)
         {
-            
+            rest = new RestService("http://localhost:2272/", "player");
 
             var playerSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Player"))
