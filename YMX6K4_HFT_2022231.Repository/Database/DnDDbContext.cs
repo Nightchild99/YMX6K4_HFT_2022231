@@ -31,17 +31,17 @@ namespace YMX6K4_HFT_2022231.Repository.Database
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<Player>(player => player
-                    .HasOne<Race>()
-                    .WithMany(race => race.Players)
-                    .HasForeignKey(player => player.RaceID)
-                    .OnDelete(DeleteBehavior.Cascade));
+            modelbuilder.Entity<Player>()
+                .HasOne(p => p.Race)
+                .WithMany(r => r.Players)
+                .HasForeignKey(p => p.RaceID)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelbuilder.Entity<Player>(player => player
-                    .HasOne<Class>()
-                    .WithMany(_class => _class.Players)
-                    .HasForeignKey(player => player.ClassID)
-                    .OnDelete(DeleteBehavior.Cascade));
+            modelbuilder.Entity<Player>()
+                .HasOne(p => p.Class)
+                .WithMany(c => c.Players)
+                .HasForeignKey(p => p.ClassID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelbuilder.Entity<Race>().HasData(new Race[]
             {

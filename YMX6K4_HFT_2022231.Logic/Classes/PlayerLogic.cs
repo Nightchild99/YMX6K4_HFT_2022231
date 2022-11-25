@@ -64,7 +64,7 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
 
         public IEnumerable<Class> MostPlayedClass()
         {
-            var asd =  this.repo.ReadAll().GroupBy(p => p.Class)
+            var asd =  this.repo.ReadAll().GroupBy(p => p.Class.Name)
                                 .OrderByDescending(g => g.Count())
                                 .FirstOrDefault();
 

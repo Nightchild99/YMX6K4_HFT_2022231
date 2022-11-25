@@ -26,7 +26,7 @@ namespace YMX6K4_HFT_2022231.Client
                 foreach (var item in items)
                 {
                     Console.WriteLine(item.Name + " is playing " + item.CharacterName + ", a level " 
-                                      + item.Level + " " + item.Race.Name + " " + item.Class.Name);
+                                      + item.Level + " " + item.Race.Name + " " + item.Class.Name + ".");
                 }
             }
             else if (entity == "Race")
@@ -45,6 +45,7 @@ namespace YMX6K4_HFT_2022231.Client
                     Console.WriteLine(item.ID + "\t" + item.Name);
                 }
             }
+            Console.ReadLine();
         }
 
         static void Update(string entity)

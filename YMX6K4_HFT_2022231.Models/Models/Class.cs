@@ -30,7 +30,7 @@ namespace YMX6K4_HFT_2022231.Models.Models
 
         public Class()
         {
-            Players = new HashSet<Player>();
+            this.Players = new HashSet<Player>();
         }
 
         public Class(string line)
