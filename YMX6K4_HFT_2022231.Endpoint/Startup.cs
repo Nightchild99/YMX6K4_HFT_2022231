@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using YMX6K4_HFT_2022231.Logic.Classes;
 using YMX6K4_HFT_2022231.Logic.Interfaces;
 using YMX6K4_HFT_2022231.Models.Models;
+using YMX6K4_HFT_2022231.Repository.Database;
 using YMX6K4_HFT_2022231.Repository.Interface;
 using YMX6K4_HFT_2022231.Repository.ModelRepositories;
 
@@ -28,6 +29,8 @@ namespace YMX6K4_HFT_2022231.Endpoint
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<DnDDbContext>();
+
             services.AddTransient<IRepository<Player>, PlayerRepository>();
             services.AddTransient<IRepository<Race>, RaceRepository>();
             services.AddTransient<IRepository<Class>, ClassRepository>();
