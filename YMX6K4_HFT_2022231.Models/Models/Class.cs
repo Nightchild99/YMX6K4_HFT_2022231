@@ -88,5 +88,10 @@ namespace YMX6K4_HFT_2022231.Models.Models
                     && b.Allowed == this.Allowed;
             }
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.ID, this.Type);
+        }
     }
 }
