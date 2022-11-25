@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using System.Collections.Generic;
 using YMX6K4_HFT_2022231.Logic.Interfaces;
 using YMX6K4_HFT_2022231.Models.Models;
@@ -8,37 +9,37 @@ namespace YMX6K4_HFT_2022231.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PlayerController : Controller
+    public class RaceController : Controller
     {
-        IPlayerLogic logic;
+        IRaceLogic logic;
 
-        public PlayerController(IPlayerLogic logic)
+        public RaceController(IRaceLogic logic)
         {
             this.logic = logic;
         }
 
         [HttpGet]
-        public IEnumerable<Player> ReadAll()
+        public IEnumerable<Race> ReadAll()
         {
             return this.logic.ReadAll();
         }
 
         [HttpGet("{id}")]
-        public Player Read(int id)
+        public Race Read(int id)
         {
             return this.logic.Read(id);
         }
 
         [HttpPost]
-        public void Create([FromBody] Player player)
+        public void Create(Race race)
         {
-            this.logic.Create(player);
+            this.logic.Create(race);
         }
 
         [HttpPut]
-        public void Update([FromBody] Player player)
+        public void Update(Race race)
         {
-            this.logic.Update(player);
+            this.logic.Update(race);
         }
 
         [HttpDelete("{id}")]
