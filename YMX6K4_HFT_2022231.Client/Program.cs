@@ -1,75 +1,162 @@
 ﻿using ConsoleTools;
 using System;
-using YMX6K4_HFT_2022231.Logic.Classes;
-using YMX6K4_HFT_2022231.Repository.Database;
-using YMX6K4_HFT_2022231.Repository.ModelRepositories;
+using YMX6K4_HFT_2022231.Models.Models;
+using System.Linq;
+using System.Collections.Generic;
+using MovieDbApp.Client;
+using Microsoft.VisualBasic.FileIO;
 
 namespace YMX6K4_HFT_2022231.Client
 {
     internal class Program
     {
-        static PlayerLogic playerLogic;
-        static RaceLogic raceLogic;
-        static ClassLogic classLogic;
+        static RestService rest;
 
         static void Create(string entity)
         {
-            Console.WriteLine(entity + " create");
-            Console.WriteLine();
+            if (entity == "Player")
+            {
+                Console.WriteLine("Enter player name: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter character name: ");
+                string charname = Console.ReadLine();
+                Console.WriteLine("Enter race ID: ");
+                int raceid = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter class ID: ");
+                int classid = int.Parse(Console.ReadLine());
+
+                Player newPlayer = new Player { Name = name, CharacterName = charname, RaceID = raceid, ClassID = classid };
+                rest.Post(newPlayer, "palyer");
+            }
+            else if (entity == "Race")
+            {
+                Console.WriteLine("Enter race name: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter race source: ");
+                string source = Console.ReadLine();
+                Console.WriteLine("Is race allowed by DM? (0/1): ");
+                int allowed = int.Parse(Console.ReadLine());
+                Race newRace;
+
+                if (allowed == 1)
+                {
+                    newRace = new Race { Name = name, Source = source, Allowed = true };
+                }
+                else
+                {
+                    newRace = new Race { Name = name, Source = source, Allowed = false };
+                }
+
+                rest.Post(newRace, "race");
+                
+            }
+            else if (entity == "Class")
+            {
+                Console.WriteLine("Enter class name: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter class type: ");
+                string type = Console.ReadLine();
+                Console.WriteLine("Is this class allowed by DM? (0/1): ");
+                int allowed = int.Parse(Console.ReadLine());
+
+                bool isAllowed;
+
+                if (allowed == 0)
+                {
+                    isAllowed = false;
+                }
+                else
+                {
+                    isAllowed = true;
+                }
+
+                Class newClass;
+
+                switch (type)
+                {
+                    case "tank":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.tank, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "melee":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.melee, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "ranged":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.ranged, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "caster":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.caster, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "support":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.support, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "healer":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.healer, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                    case "various":
+                        newClass = new Class { Name = name, Type = Models.Models.Type.various, Allowed = isAllowed };
+                        rest.Post(newClass, "class");
+                        break;
+                }
+            }
         }
 
         static void List(string entity)
         {
             if (entity == "Player")
             {
-                var items = playerLogic.ReadAll();
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.Name + " is playing " + item.CharacterName + ", a level " 
-                                      + item.Level + " " + item.Race.Name + " " + item.Class.Name + ".");
-                }
+
             }
             else if (entity == "Race")
             {
-                var items = raceLogic.ReadAll();
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.ID + "\t" + item.Name);
-                }
+
             }
             else if (entity == "Class")
             {
-                var items = classLogic.ReadAll();
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item.ID + "\t" + item.Name);
-                }
+
             }
-            Console.ReadLine();
         }
 
         static void Update(string entity)
         {
-            Console.WriteLine(entity + " update");
-            Console.ReadLine();
+            if (entity == "Player")
+            {
+
+            }
+            else if (entity == "Race")
+            {
+
+            }
+            else if (entity == "Class")
+            {
+
+            }
         }
+
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Player")
+            {
+
+            }
+            else if (entity == "Race")
+            {
+
+            }
+            else if (entity == "Class")
+            {
+
+            }
         }
 
         static void Main(string[] args)
         {
-            var ctx = new DnDDbContext();
-
-            var playerRepo = new PlayerRepository(ctx);
-            var raceRepo = new RaceRepository(ctx);
-            var classRepo = new ClassRepository(ctx);
-
-            playerLogic = new PlayerLogic(playerRepo);
-            raceLogic = new RaceLogic(raceRepo);
-            classLogic = new ClassLogic(classRepo);
+            
 
             var playerSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Player"))
