@@ -153,15 +153,118 @@ namespace YMX6K4_HFT_2022231.Client
         {
             if (entity == "Player")
             {
+                Console.WriteLine("Enter player's ID to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Player old = rest.Get<Player>(id, "player");
+                Console.WriteLine($"New name [old: {old.Name}]: ");
+                string name = Console.ReadLine();
+                Console.WriteLine($"New character name [old: {old.CharacterName}]: ");
+                string charName = Console.ReadLine();
+                Console.WriteLine($"New race ID [old: {old.RaceID}]: ");
+                int raceId = int.Parse(Console.ReadLine());
+                Console.WriteLine($"New class ID [old: {old.ClassID}]: ");
+                int classId = int.Parse(Console.ReadLine());
 
+                old.Name = name;
+                old.CharacterName = charName;
+                old.RaceID = raceId;
+                old.ClassID = classId;
+                rest.Put(old, "player");
             }
             else if (entity == "Race")
             {
+                Console.WriteLine("Enter race's ID to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Race old = rest.Get<Race>(id, "race");
+                Console.WriteLine($"New name [old: {old.Name}]: ");
+                string name = Console.ReadLine();
+                Console.WriteLine($"New source [old: {old.Source}]");
+                string source = Console.ReadLine();
+                Console.WriteLine($"Is this allowed? [{old.Allowed}] (0/1)");
+                int allowed = int.Parse(Console.ReadLine());
 
+                if (allowed == 1)
+                {
+                    old.Name = name;
+                    old.Source = source;
+                    old.Allowed = true;
+                    rest.Put(old, "race");
+                }
+                else
+                {
+                    old.Name = name;
+                    old.Source = source;
+                    old.Allowed = false;
+                    rest.Put(old, "race");
+                }
             }
             else if (entity == "Class")
             {
+                Console.WriteLine("Enter class ID to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Class old = rest.Get<Class>(id, "class");
+                Console.WriteLine($"New name [old: {old.Name}]: ");
+                string name = Console.ReadLine();
+                Console.WriteLine($"New source [old: {old.Type}]");
+                string type = Console.ReadLine();
+                Console.WriteLine($"Is this allowed? [{old.Allowed}] (0/1)");
+                int allowed = int.Parse(Console.ReadLine());
 
+                bool isAllowed;
+                if (allowed == 1)
+                {
+                    isAllowed = true;
+                }
+                else
+                {
+                    isAllowed = false;
+                }
+
+                switch (type)
+                {
+                    case "tank":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.tank;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "melee":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.melee;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "ranged":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.ranged;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "caster":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.caster;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "support":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.support;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "healer":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.healer;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                    case "various":
+                        old.Name = name;
+                        old.Type = Models.Models.Type.various;
+                        old.Allowed = isAllowed;
+                        rest.Put(old, "class");
+                        break;
+                }
             }
         }
 
