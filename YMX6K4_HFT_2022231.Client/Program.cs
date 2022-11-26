@@ -297,6 +297,65 @@ namespace YMX6K4_HFT_2022231.Client
         }
         #endregion
 
+        #region Non Crud Methods
+
+        static void PlayersUsingCoreRules()
+        {
+            Console.WriteLine("Players using core rules: ");
+            List<Player> items = rest.Get<Player>("Stat/PlayersUsingCoreRules");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.ReadLine();
+        }
+
+        static void PlayersPlayingCaster()
+        {
+            Console.WriteLine("Players playing caster class: ");
+            List<Player> items = rest.Get<Player>("Stat/PlayersPlayingCaster");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.ReadLine();
+        }
+
+        static void MostPlayedClass()
+        {
+            Console.WriteLine("The most played class in party:");
+            List<string> items = rest.Get<string>("Stat/MostPlayedClass");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }
+
+        static void SupportPlayersUsingCoreRules()
+        {
+            Console.WriteLine("Players playing support class and using core rules:");
+            List<Player> items = rest.Get<Player>("Stat/SupportPlayersUsingCoreRules");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.ReadLine();
+        }
+
+        static void PlayersWithNotAllowedCharacters()
+        {
+            Console.WriteLine("Players playing a characted with a race or class not allowed by the DM: ");
+            List<Player> items = rest.Get<Player>("Stat/PlayersWithNotAllowedCharacters");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.ReadLine();
+        }
+
+        #endregion
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:2272/", "player");
@@ -322,10 +381,19 @@ namespace YMX6K4_HFT_2022231.Client
                 .Add("Update", () => Update("Class"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var statSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Players Using Core Rules", () => PlayersUsingCoreRules())
+                .Add("Players Playing Caster", () => PlayersPlayingCaster())
+                .Add("Most Played Class", () => MostPlayedClass())
+                .Add("Support Players Using Core Rules", () => SupportPlayersUsingCoreRules())
+                .Add("Players With Not Allowed Characters", () => PlayersWithNotAllowedCharacters())
+                .Add("Exit", ConsoleMenu.Close);
+
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Players", () => playerSubMenu.Show())
                 .Add("Races", () => raceSubMenu.Show())
                 .Add("Classes", () => classSubMenu.Show())
+                .Add("Stat", () => statSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
