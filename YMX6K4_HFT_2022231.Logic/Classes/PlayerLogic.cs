@@ -62,15 +62,20 @@ namespace YMX6K4_HFT_2022231.Logic.Classes
             return this.repo.ReadAll().Where(p => p.Class.Type == Models.Models.Type.caster);
         }
 
-        public IEnumerable<Class> MostPlayedClass()
+        public IEnumerable<string> MostPlayedClass()
         {
-            var asd =  this.repo.ReadAll().GroupBy(p => p.Class.Name)
-                                .OrderByDescending(g => g.Count())
-                                .FirstOrDefault();
+            var asd = this.repo.ReadAll()
+                .GroupBy(p => p.Class.Name)
+                .Select(t => new
+                {
+                    className = t.Key,
+                    playerNum = t.Count()
+                })
+                .OrderByDescending(p => p.playerNum)
+                .FirstOrDefault();
 
-            var result = new List<Class>();
-            result.Add(asd.FirstOrDefault().Class);
-
+            List<string> result = new List<string>();
+            result.Add($"{asd.className} is played by {asd.playerNum} players.");
             return result;
         }
 

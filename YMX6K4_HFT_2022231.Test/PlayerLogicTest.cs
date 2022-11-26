@@ -172,9 +172,8 @@ namespace YMX6K4_HFT_2022231.Test
         [Test]
         public void MostPlayedClassTest()
         {
-            var expected = new List<Class>();
-            var rogue = new Class("13#Rogue#melee#1");
-            expected.Add(rogue);
+            List<string> expected = new List<string>();
+            expected.Add("Rogue is played by 2 players.");
 
             var result = logic.MostPlayedClass();
 

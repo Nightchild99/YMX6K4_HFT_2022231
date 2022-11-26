@@ -30,7 +30,7 @@ namespace YMX6K4_HFT_2022231.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Class> MostPlayedClass()
+        public IEnumerable<string> MostPlayedClass()
         {
             return this.logic.MostPlayedClass();
         }

@@ -17,7 +17,7 @@ namespace YMX6K4_HFT_2022231.Logic.Interfaces
 
         IEnumerable<Player> PlayersUsingCoreRules();
         IEnumerable<Player> PlayersPlayingCaster();
-        IEnumerable<Class> MostPlayedClass();
+        IEnumerable<string> MostPlayedClass();
         IEnumerable<Player> SupportPlayersUsingCoreRules();
         IEnumerable<Player> PlayersWithNotAllowedCharacters();
     }
